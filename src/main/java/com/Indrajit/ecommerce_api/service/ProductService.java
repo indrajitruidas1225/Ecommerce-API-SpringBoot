@@ -45,4 +45,20 @@ public class ProductService {
         }
         productRepository.deleteById(id);
     }
+
+    public List<Product> getProductByName(String name) {
+        List<Product> products = productRepository.findByNameContainingIgnoreCase(name);
+        if(products.isEmpty()){
+            throw new ResourceNotFoundException("No product found with the name "+name);
+        }
+        return products;
+    }
+
+    public List<Product> getProductByCategoryId(Long id){
+        List<Product> products = productRepository.findByCategoryId(id);
+        if(products.isEmpty()){
+            throw new ResourceNotFoundException("No product found with category id "+id);
+        }
+        return products;
+    }
 }
