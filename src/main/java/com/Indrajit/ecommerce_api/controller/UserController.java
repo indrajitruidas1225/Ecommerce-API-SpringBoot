@@ -33,11 +33,11 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserByEmail(email));
     }
 
-    @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        User createdUser = userService.createUser(user);
-        return ResponseEntity.created(URI.create("/api/users"+ createdUser.getId())).body(createdUser);
-    }
+//    @PostMapping
+//    public ResponseEntity<User> createUser(@RequestBody User user){
+//        User createdUser = userService.createUser(user);
+//        return ResponseEntity.created(URI.create("/api/users"+ createdUser.getId())).body(createdUser);
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user){
