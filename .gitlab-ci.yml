@@ -1,5 +1,4 @@
 stages:
-  - test
   - build
   - docker
 
@@ -7,22 +6,7 @@ variables:
   MAVEN_CLI_OPTS: "-B -DskipTests=false"
   DOCKER_DRIVER: overlay2
 
-#Step 1: run unit tests
-
-unit-test:
-  stage: test
-  image: maven:3.9.6-eclipse-temurin-17
-  script:
-    - mvn $MAVEN_CLI_OPTS clean test
-  artifacts:
-    when: always
-    reports:
-      junit: target/surefire-reports/TEST-*.xml
-    paths:
-      - target/surefire-reports/
-    expire_in: 1 week
-
-# Step 2: Build JAR with Maven
+# Step 1: Build JAR with Maven
 maven-build:
   stage: build
   image: maven:3.9.6-eclipse-temurin-17
@@ -33,7 +17,7 @@ maven-build:
       - target/*.jar
     expire_in: 1 week
 
-# Step 3: Build & Push Docker Image
+# Step 2: Build & Push Docker Image
 docker-build:
   stage: docker
   image: docker:latest
