@@ -10,7 +10,7 @@ variables:
 # Step 1: Run Unit Tests
 maven-test:
   stage: test
-  image: maven:3.9.6-eclipse-temurin-17
+  image: maven:3.9.6-eclipse-temurin-21
   script:
     - mvn $MAVEN_CLI_OPTS test
   artifacts:
@@ -21,7 +21,7 @@ maven-test:
 # Step 2: Build JAR with Maven (skip tests here since already run)
 maven-build:
   stage: build
-  image: maven:3.9.6-eclipse-temurin-17
+  image: maven:3.9.6-eclipse-temurin-21
   script:
     - mvn $MAVEN_CLI_OPTS clean package -DskipTests
   artifacts:
